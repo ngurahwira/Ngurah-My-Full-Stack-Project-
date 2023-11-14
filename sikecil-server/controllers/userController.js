@@ -12,6 +12,7 @@ class UserLogin {
         balance: 0,
         email,
         password,
+        role: "customer",
       });
 
       if (!password || !email) throw new Error("Login error");
@@ -28,20 +29,20 @@ class UserLogin {
   static async login(req, res, next) {
     try {
       const { id, email, password } = req.body;
-      console.log(req.body, 12121212);
+      // console.log(req.body, 12121212);
       if (!password || !email) throw new Error("Login error");
       const data = await Profile.findOne({
         where: {
           email,
         },
       });
-      console.log(data);
+      // console.log(data);
       if (!data) {
         throw new Error("User not found");
       }
 
       let compere = verifyHash(password, data.password);
-      console.log(compere);
+      // console.log(compere);
       if (!compere) {
         throw new Error(`Password wrong`);
       }
@@ -49,6 +50,7 @@ class UserLogin {
       let payload = {
         id: data.id,
         email: data.email,
+        role: data.role,
       };
 
       let token = createToken(payload);
