@@ -1,5 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
+const { hashing } = require("../helpers");
+
 module.exports = (sequelize, DataTypes) => {
   class Profile extends Model {
     /**
@@ -8,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Profile.hasMany(models.Bid, { foreignKey: "ProfileId" });
     }
   }
   Profile.init(
@@ -16,12 +18,19 @@ module.exports = (sequelize, DataTypes) => {
       fullname: DataTypes.STRING,
       address: DataTypes.STRING,
       balance: DataTypes.INTEGER,
-      UserId: DataTypes.INTEGER,
+      email: DataTypes.STRING,
+      password: DataTypes.STRING,
     },
     {
       sequelize,
       modelName: "Profile",
     }
   );
+
+  Profile.beforeCreate((instance) => {
+    let hashingResult = hashing(instance.password);
+    instance.password = hashingResult;
+  });
+
   return Profile;
 };
