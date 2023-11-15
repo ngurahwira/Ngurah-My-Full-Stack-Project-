@@ -18,9 +18,12 @@ class UserLogin {
       if (!password || !email) throw new Error("Login error");
 
       res.status(201).json({
-        dataUser,
+        message: `${fullname} success create`,
+        dataUser: {
+          id: dataUser.id,
+          email: dataUser.email,
+        },
       });
-      //   console.log(dataUser, 1212);
     } catch (error) {
       next(error);
     }

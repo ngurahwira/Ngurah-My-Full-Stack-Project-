@@ -3,7 +3,7 @@ const { Product } = require("../models");
 class Controller {
   static async showData(req, res, next) {
     try {
-      res.send("hallo");
+      // res.send("hallo");
     } catch (error) {
       console.log(error);
     }

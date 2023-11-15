@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-     "test": "jest --forceExit --detectOpenHandles --testTimeout=1000 --verbose",
+    "test": "jest --forceExit --detectOpenHandles --testTimeout=1000 --verbose",
     "db:dev": "sequelize-cli db:drop && sequelize-cli db:create && sequelize-cli db:migrate && sequelize-cli db:seed:all",
     "db:test": "sequelize-cli --env=test db:drop && sequelize-cli --env=test db:create && sequelize-cli --env=test db:migrate && sequelize-cli --env=test db:seed:all"
   },
@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.3",
