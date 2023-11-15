@@ -12,8 +12,9 @@ router.get("/", Controller.showData);
 router.post("/register", UserLogin.register);
 router.post("/login", UserLogin.login);
 
-router.use(authentication);
+// router.use(authentication);
 //!CRUD
+router.get("/bid/:id", Controller.showData);
 router.post("/product", authorization, Controller.addproduct);
 
 module.exports = router;
