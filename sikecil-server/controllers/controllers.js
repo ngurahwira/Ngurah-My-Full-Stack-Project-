@@ -9,7 +9,8 @@ class Controller {
       console.log(data);
 
       res.status(200).json({
-        bid: data.get("name_event"),
+        Item: data.get("item"),
+        Price: data.get("amount"),
       });
     } catch (error) {
       console.log(error);

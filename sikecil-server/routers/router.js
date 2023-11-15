@@ -10,11 +10,11 @@ router.get("/", Controller.showData);
 
 //!login and Register
 router.post("/register", UserLogin.register);
+router.get("/bid/:id", Controller.showData);
 router.post("/login", UserLogin.login);
 
-// router.use(authentication);
+router.use(authentication);
 //!CRUD
-router.get("/bid/:id", Controller.showData);
 router.post("/product", authorization, Controller.addproduct);
 
 module.exports = router;
