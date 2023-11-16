@@ -1,4 +1,31 @@
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const API = axios.create({
+  baseURL: "http://localhost:3000",
+});
+
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await API.post("/login", {
+        email,
+        password,
+      });
+
+      localStorage.setItem("token", res.data.access_token);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <div className="hero min-h-screen bg-base-200">
@@ -12,7 +39,7 @@ const Login = () => {
               className="card-body"
               novalidate=""
               action=""
-              // onSubmit={handleLogin}
+              onSubmit={handleLogin}
             >
               <div className="form-control">
                 <label className="label">
@@ -22,7 +49,7 @@ const Login = () => {
                   type="name"
                   placeholder="Email"
                   className="input input-bordered"
-                  // onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 
@@ -34,7 +61,7 @@ const Login = () => {
                   type="password"
                   placeholder="Password"
                   className="input input-bordered"
-                  // onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <div className="form-control mt-6">
