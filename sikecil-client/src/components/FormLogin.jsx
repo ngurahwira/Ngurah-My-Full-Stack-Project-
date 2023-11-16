@@ -35,7 +35,9 @@ const Login = () => {
           g_token: response.credential,
         },
       });
-      console.log(data);
+      // console.log(data);
+      localStorage.setItem("token", data.access_token);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -51,7 +53,7 @@ const Login = () => {
       document.getElementById("buttonDiv"),
       { theme: "outline", size: "large" } // customization attributes
     );
-    google.accounts.id.prompt(); // also display the One Tap dialog
+    google.accounts.id.prompt();
   }, []);
 
   return (

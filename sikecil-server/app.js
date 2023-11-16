@@ -1,12 +1,10 @@
 require("dotenv").config();
 const cors = require("cors");
+
 const express = require("express");
 const router = require("./routers/router");
 const errorHandler = require("./middlewares/errorHandler");
 const app = express();
-
-const { OAuth2Client } = require("google-auth-library");
-const client = new OAuth2Client();
 
 app.use(cors());
 //body parser

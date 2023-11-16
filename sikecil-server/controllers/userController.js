@@ -1,5 +1,7 @@
 const { verifyHash, createToken } = require("../helpers");
 const { Profile } = require("../models");
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client();
 
 class UserLogin {
   //! Register
@@ -57,7 +59,6 @@ class UserLogin {
       };
 
       let token = createToken(payload);
-      // console.log(token);
       res.status(200).json({
         access_token: token,
       });
@@ -67,15 +68,33 @@ class UserLogin {
   }
   static async loginGoogle(req, res, next) {
     try {
+      // console.log(req.headers.g_token);
       const ticket = await client.verifyIdToken({
         idToken: req.headers.g_token,
-        audience: process.env.G_CLIENT || "",
+        audience: process.env.G_CLIENT,
       });
       const payload = ticket.getPayload();
-      console.log("ini payload", payload);
-      const userid = payload["sub"];
-      res.status(200).json({ message: "masuk gan " });
+
+      const user = await Profile.findOrCreate({
+        where: {
+          email: payload.email,
+        },
+        defaults: {
+          fullname: payload.name,
+          email: payload.email,
+          address: payload.locale,
+          balance: 0,
+          role: "customer",
+          password: String(Math.random()),
+        },
+      });
+
+      let token = createToken(payload);
+      res.status(200).json({
+        access_token: token,
+      });
     } catch (error) {
+      console.error("Error in loginGoogle:", error);
       next(error);
     }
   }
