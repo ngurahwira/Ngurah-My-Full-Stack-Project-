@@ -81,7 +81,7 @@ const updateSpreadsheet = async (id, properties) => {
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
 
-      const updatedId = row.get("id").split("-").slice(0, 2).join("-");
+      const updatedId = row.get("id");
 
       if (updatedId === id) {
         row.assign(properties);

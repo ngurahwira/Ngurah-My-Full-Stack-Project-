@@ -38,7 +38,7 @@ class MakePayment {
         CryptoJS.HmacSHA256(stringtosign, apikey)
       );
 
-      axios
+      const result = await axios
         .post(url, body, {
           headers: {
             Accept: "application/json",
@@ -51,20 +51,24 @@ class MakePayment {
         .then((response) => {
           // response
 
-          console.log(response.data);
+          // console.log(response.data);
           // const responseJson = response.data;
           // res.status(200).json({ data: response });
-          res.status(200).json({ ipaymu_response: response.data });
+          // res.status(200).json({ ipaymu_response: response.data });
+          return response.data;
         })
         .catch((error) => {
           console.error(error);
-          res.status(400).json({ error: "invalid request" });
+          // res.status(400).json({ error: "invalid request" });
+          return error;
         });
+      return result;
     } catch (error) {
       console.error(error);
-      res.status(500).json({
-        error: "Internal Server Error",
-      });
+      // res.status(500).json({
+      //   error: "Internal Server Error",
+      // });
+      return error;
     }
   }
 }

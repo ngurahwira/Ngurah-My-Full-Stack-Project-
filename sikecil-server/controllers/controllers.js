@@ -3,6 +3,7 @@ const {
   getAllData,
   updateSpreadsheet,
 } = require("../helpers/bidHelper");
+const MakePayment = require("../helpers/ipaymuController");
 
 class Controller {
   static async showData(req, res, next) {
@@ -37,12 +38,20 @@ class Controller {
 
   static async updateData(req, res, next) {
     try {
-      console.log(req.body);
-      const { order_id, updatedData } = req.body;
+      const { id } = req.params;
 
-      await updateSpreadsheet(order_id, updatedData);
+      const { Price } = req.body;
+      const updatedData = {
+        amount: Price,
+      };
+      const paymentData = await MakePayment.payment(req, res, next);
 
-      res.status(200).json({ message: "Data updated successfully" });
+      // console.log("tets12345", paymentData);
+      await updateSpreadsheet(id, updatedData);
+      res.status(200).json({
+        message: "Data updated successfully",
+        paymentUrl: paymentData.Data.Url,
+      });
     } catch (error) {
       console.error("Error:", error);
       next(error);

@@ -1,7 +1,7 @@
 const express = require("express");
 const Controller = require("../controllers/controllers");
 const UserLogin = require("../controllers/userController");
-const MakePayment = require("../controllers/ipaymuController");
+const MakePayment = require("../helpers/ipaymuController");
 const authentication = require("../middlewares/authentication");
 const { authorization } = require("../middlewares/authorization");
 
@@ -14,7 +14,8 @@ router.get("/", Controller.showData);
 router.post("/register", UserLogin.register);
 router.post("/login", UserLogin.login);
 router.post("/auth/google", UserLogin.loginGoogle);
-router.put("/bid/:id", Controller.showDataDetail);
+router.get("/bid/:id", Controller.showDataDetail);
+router.put("/bid/:id", Controller.updateData);
 
 //!Payment
 router.post("/payment", MakePayment.payment);
