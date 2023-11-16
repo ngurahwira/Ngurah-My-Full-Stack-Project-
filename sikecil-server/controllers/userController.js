@@ -65,6 +65,20 @@ class UserLogin {
       next(error);
     }
   }
+  static async loginGoogle(req, res, next) {
+    try {
+      const ticket = await client.verifyIdToken({
+        idToken: req.headers.g_token,
+        audience: process.env.G_CLIENT || "",
+      });
+      const payload = ticket.getPayload();
+      console.log("ini payload", payload);
+      const userid = payload["sub"];
+      res.status(200).json({ message: "masuk gan " });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = UserLogin;

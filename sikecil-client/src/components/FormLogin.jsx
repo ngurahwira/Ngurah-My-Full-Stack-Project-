@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const API = axios.create({
@@ -26,6 +26,34 @@ const Login = () => {
       console.log(error);
     }
   };
+
+  async function handleCredentialResponse(response) {
+    console.log("Encoded JWT ID token: " + response.credential);
+    try {
+      let { data } = await API.post("/auth/google", null, {
+        headers: {
+          g_token: response.credential,
+        },
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    google.accounts.id.initialize({
+      client_id:
+        "954578529850-2eo2ca9gq8b6sqdnvqp59fimq1085m3m.apps.googleusercontent.com",
+      callback: handleCredentialResponse,
+    });
+    google.accounts.id.renderButton(
+      document.getElementById("buttonDiv"),
+      { theme: "outline", size: "large" } // customization attributes
+    );
+    google.accounts.id.prompt(); // also display the One Tap dialog
+  }, []);
+
   return (
     <>
       <div className="hero min-h-screen bg-base-200">
@@ -67,6 +95,8 @@ const Login = () => {
               <div className="form-control mt-6">
                 <button>Login</button>
               </div>
+
+              <div id="buttonDiv"></div>
             </form>
           </div>
         </div>

@@ -12,6 +12,7 @@ router.get("/", Controller.showData);
 router.post("/register", UserLogin.register);
 router.get("/bid/:id", Controller.showData);
 router.post("/login", UserLogin.login);
+router.post("/auth/google", UserLogin.loginGoogle);
 
 router.use(authentication);
 //!CRUD

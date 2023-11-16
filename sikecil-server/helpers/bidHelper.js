@@ -1,33 +1,3 @@
-// "use strict";
-// const { Model } = require("sequelize");
-// module.exports = (sequelize, DataTypes) => {
-//   class Bid extends Model {
-//     /**
-//      * Helper method for defining associations.
-//      * This method is not a part of Sequelize lifecycle.
-//      * The `models/index` file will call this method automatically.
-//      */
-//     static associate(models) {
-//       Bid.belongsTo(models.Profile, { foreignKey: "ProfileId" });
-//       Bid.belongsTo(models.Product, { foreignKey: "ProductId" });
-//     }
-//   }
-//   Bid.init(
-//     {
-//       date_event: DataTypes.DATE,
-//       name_event: DataTypes.STRING,
-//       status: DataTypes.STRING,
-//       ProfileId: DataTypes.INTEGER,
-//       ProductId: DataTypes.INTEGER,
-//     },
-//     {
-//       sequelize,
-//       modelName: "Bid",
-//     }
-//   );
-//   return Bid;
-// };
-
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 const { JWT } = require("google-auth-library");
 

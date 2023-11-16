@@ -5,6 +5,9 @@ const router = require("./routers/router");
 const errorHandler = require("./middlewares/errorHandler");
 const app = express();
 
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client();
+
 app.use(cors());
 //body parser
 app.use(express.urlencoded({ extended: true }));
