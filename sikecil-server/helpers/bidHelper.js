@@ -47,4 +47,20 @@ const getDataById = async (id) => {
   }
 };
 
-module.exports = getDataById;
+const getAllData = async () => {
+  await docCall();
+  try {
+    const sheet = googleSpreadsheetInstance.sheetsById[SHEET_ID];
+    const rows = await sheet.getRows();
+
+    // Map rows to plain objects
+    const data = rows.map((row) => row._rawData);
+
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw new Error(error);
+  }
+};
+
+module.exports = { getDataById, getAllData };
