@@ -1,7 +1,16 @@
+import { useNavigate } from "react-router-dom";
+
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+
   return (
     <>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100 pb-10">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -25,10 +34,7 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Parent</a>
+                <a>Category</a>
                 <ul className="p-2">
                   <li>
                     <a>Submenu 1</a>
@@ -38,21 +44,15 @@ const Navbar = () => {
                   </li>
                 </ul>
               </li>
-              <li>
-                <a>Item 3</a>
-              </li>
             </ul>
           </div>
           <a className="btn btn-ghost text-xl">daisyUI</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <a>Item 1</a>
-            </li>
+          <ul className="menu menu-horizontal px-5">
             <li tabIndex={0}>
               <details>
-                <summary>Parent</summary>
+                <summary>Category</summary>
                 <ul className="p-2">
                   <li>
                     <a>Submenu 1</a>
@@ -63,13 +63,12 @@ const Navbar = () => {
                 </ul>
               </details>
             </li>
-            <li>
-              <a>Item 3</a>
-            </li>
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          <a className="btn" onClick={handleLogout}>
+            Sign Out
+          </a>
         </div>
       </div>
     </>

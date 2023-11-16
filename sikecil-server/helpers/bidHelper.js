@@ -54,7 +54,14 @@ const getAllData = async () => {
     const rows = await sheet.getRows();
 
     // Map rows to plain objects
-    const data = rows.map((row) => row._rawData);
+    const data = rows.map((row) => {
+      const rowData = row._rawData;
+      const objectData = {};
+      sheet.headerValues.forEach((header, index) => {
+        objectData[header] = rowData[index];
+      });
+      return objectData;
+    });
 
     return data;
   } catch (error) {
