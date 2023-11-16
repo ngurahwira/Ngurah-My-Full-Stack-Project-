@@ -70,4 +70,31 @@ const getAllData = async () => {
   }
 };
 
-module.exports = { getDataById, getAllData };
+const updateSpreadsheet = async (id, properties) => {
+  await docCall();
+
+  try {
+    const sheet = googleSpreadsheetInstance.sheetsById[SHEET_ID];
+
+    const rows = await sheet.getRows();
+
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+
+      const updatedId = row.get("id").split("-").slice(0, 2).join("-");
+
+      if (updatedId === id) {
+        row.assign(properties);
+        await row.save();
+        return;
+      }
+    }
+
+    throw new Error("ID value not found");
+  } catch (error) {
+    console.error("Error:", error);
+    throw new Error(error);
+  }
+};
+
+module.exports = { getDataById, getAllData, updateSpreadsheet };

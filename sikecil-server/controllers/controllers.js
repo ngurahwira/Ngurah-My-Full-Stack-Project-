@@ -1,4 +1,8 @@
-const { getDataById, getAllData } = require("../helpers/bidHelper");
+const {
+  getDataById,
+  getAllData,
+  updateSpreadsheet,
+} = require("../helpers/bidHelper");
 
 class Controller {
   static async showData(req, res, next) {
@@ -16,14 +20,31 @@ class Controller {
     try {
       const { id } = req.params;
       const data = await getDataById(id);
-      console.log(data, 199999999);
 
       res.status(200).json({
         Item: data.get("item"),
         Price: data.get("amount"),
+        Daysleft: data.get("daysleft"),
+        Description: data.get("description"),
+        Img: data.get("img_url"),
+        Status: data.get("status"),
       });
     } catch (error) {
       console.log(error);
+      next(error);
+    }
+  }
+
+  static async updateData(req, res, next) {
+    try {
+      console.log(req.body);
+      const { order_id, updatedData } = req.body;
+
+      await updateSpreadsheet(order_id, updatedData);
+
+      res.status(200).json({ message: "Data updated successfully" });
+    } catch (error) {
+      console.error("Error:", error);
       next(error);
     }
   }

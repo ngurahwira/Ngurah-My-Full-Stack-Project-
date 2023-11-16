@@ -3,6 +3,7 @@ import HomePage from "../pages/HomePage";
 import Register from "../components/FormRegister";
 import Layout from "../pages/LayoutBase";
 import Login from "../components/FormLogin";
+import PageDetail from "../pages/PageDetail";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
+      },
+      {
+        path: "/bid/:id",
+        element: <PageDetail />,
       },
     ],
   },
