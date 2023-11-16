@@ -58,35 +58,43 @@ const PageDetail = () => {
 
   return (
     <>
-      <div className="container mx-auto mt-8">
-        <div className="card lg:card-side bg-base-100 shadow-xl">
+      <div className="container mx-auto my-8">
+        <div className="card lg:card-side bg-white shadow-xl p-6 lg:p-8 transform hover:scale-105 transition-transform">
           <figure>
             <img
               src={data.Img}
               alt={data.Item}
-              className="object-cover w-full h-64 lg:h-auto"
+              className="object-cover w-full h-64 lg:h-auto rounded-lg"
             />
           </figure>
           <div className="card-body">
-            <h2 className="card-title text-3xl font-bold mb-2">{data.Item}</h2>
-            <p className="text-gray-600 mb-2">{data.Description}</p>
+            <h2 className="card-title text-2xl lg:text-3xl font-bold mb-2 text-gray-800">
+              {data.Item}
+            </h2>
+            <p className="text-gray-600 mb-4">{data.Description}</p>
             <div className="flex justify-between items-center mb-4">
-              <div>
-                <h5>Days Left: {data.Daysleft} Days</h5>
+              <div className="flex items-center">
+                <p className="text-lg text-gray-800">IDR {data.Price}</p>
               </div>
-              <div className="flex first:first-letter:">
-                <p className="text-lg">Price: {data.Price}</p>
+              <div>
+                <h5 className="text-gray-700">
+                  Days Left: {data.Daysleft} Days
+                </h5>
               </div>
             </div>
-            <div className="card-actions justify-end">
+            <div className="card-actions flex items-center">
               <input
                 type="text"
                 placeholder="New Price"
                 value={newPrice}
                 onChange={(e) => setNewPrice(e.target.value)}
+                className="border border-gray-300 px-3 py-2 mr-2"
               />
-              <button className="btn btn-primary" onClick={handleAddToCart}>
-                Cart
+              <button
+                className="btn btn-primary px-6 py-2"
+                onClick={handleAddToCart}
+              >
+                Bid
               </button>
             </div>
           </div>
