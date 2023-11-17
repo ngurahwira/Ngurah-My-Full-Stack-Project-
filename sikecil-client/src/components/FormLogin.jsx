@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+const G_CLIENT = import.meta.env.VITE_G_CLIENT;
 
 const API = axios.create({
   baseURL: "http://localhost:3000",
@@ -45,8 +46,7 @@ const Login = () => {
 
   useEffect(() => {
     google.accounts.id.initialize({
-      client_id:
-        "954578529850-2eo2ca9gq8b6sqdnvqp59fimq1085m3m.apps.googleusercontent.com",
+      client_id: G_CLIENT,
       callback: handleCredentialResponse,
     });
     google.accounts.id.renderButton(
