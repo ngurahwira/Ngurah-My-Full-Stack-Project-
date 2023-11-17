@@ -9,7 +9,7 @@ class Controller {
   static async showData(req, res, next) {
     try {
       const data = await getAllData();
-      console.log(data);
+      // console.log(data);
       res.status(200).json({ data });
     } catch (error) {
       console.error("Error fetching all data:", error);
