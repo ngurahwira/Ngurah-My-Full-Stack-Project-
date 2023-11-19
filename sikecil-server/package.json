@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --forceExit --detectOpenHandles --testTimeout=1000 --verbose",
+    "prestart": "npm sequelize-cli db:migrate ",
+    "start": "nodemon bin/www/js",
     "db:dev": "sequelize-cli db:drop && sequelize-cli db:create && sequelize-cli db:migrate && sequelize-cli db:seed:all",
     "db:test": "sequelize-cli --env=test db:drop && sequelize-cli --env=test db:create && sequelize-cli --env=test db:migrate && sequelize-cli --env=test db:seed:all"
   },
