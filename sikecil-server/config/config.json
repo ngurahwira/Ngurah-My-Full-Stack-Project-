@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "ngurahwira",
+    "password": "2bCdk5mKLyWY",
+    "database": "SiKecil-new",
+    "host": "ep-raspy-math-31033101.ap-southeast-1.aws.neon.tech",
+    "dialect": "postgres"
   }
 }
