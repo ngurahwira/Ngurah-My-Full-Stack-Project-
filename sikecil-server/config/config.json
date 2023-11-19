@@ -18,6 +18,12 @@
     "password": "2bCdk5mKLyWY",
     "database": "SiKecil-new",
     "host": "ep-raspy-math-31033101.ap-southeast-1.aws.neon.tech",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "ssl":true,
+    "dialectOptions":{
+      "ssl":{
+        "require":true
+      }
+    }
   }
 }
