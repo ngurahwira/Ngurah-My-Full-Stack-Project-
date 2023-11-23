@@ -2,10 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../configs/config";
 const G_CLIENT = import.meta.env.VITE_G_CLIENT;
 
 const API = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: BASE_URL,
 });
 
 const Login = () => {

@@ -58,21 +58,26 @@ class Controller {
     }
   }
 
+  //!Update
   static async updateData(req, res, next) {
     try {
       const { id } = req.params;
+      const data = await getDataById(id);
+      let { Price } = req.body;
 
-      const { Price } = req.body;
-      const updatedData = {
-        amount: Price,
-      };
-      const paymentData = await MakePayment.payment();
+      if (isNaN(Price)) {
+        return res.status(400).json({ error: "Price must be a number." });
+      }
+      Price = Number(Price);
 
+      const currentAmount = Number(data.get("amount"));
+      // console.log(currentAmount, Price);
+      if (currentAmount > Price) {
+        throw new Error("New price must be greater");
+      }
+      const updatedData = { amount: Price };
       await updateSpreadsheet(id, updatedData);
-      res.status(200).json({
-        message: "Data updated successfully",
-        paymentUrl: paymentData.Data.Url,
-      });
+      res.status(200).json({ message: "Data updated successfully" });
     } catch (error) {
       console.error("Error:", error);
       next(error);
