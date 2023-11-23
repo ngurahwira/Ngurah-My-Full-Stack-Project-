@@ -37,10 +37,12 @@ const PageDetail = () => {
   const handleAddToCart = async () => {
     try {
       const updatedData = { Price: newPrice };
+      console.log(updatedData);
       const ipayMu = await API.put(`/bid/${id}`, updatedData);
-
-      const { paymentUrl } = ipayMu.data;
+      // console.log(ipayMu, 41);
+      // const { paymentUrl } = ipayMu.data;
       // window.open(paymentUrl, "_blank");
+      // console.log(id);
       navigate(`/checkout/${id}`);
     } catch (error) {
       console.error("Error updating price:", error);
