@@ -1,6 +1,11 @@
 const express = require("express");
 const axios = require("axios");
 const CryptoJS = require("crypto-js");
+const {
+  getDataById,
+  getAllData,
+  updateSpreadsheet,
+} = require("../helpers/bidHelper");
 
 class MakePayment {
   static async home(req, res, next) {
@@ -11,6 +16,10 @@ class MakePayment {
 
   static async payment(req, res, next) {
     try {
+      // const { id } = req.params;
+      // // console.log(req.params);
+      // const data = await getDataById(id);
+      // console.log(data.get("item"));
       // adjust with your iPaymu api key & va
       const apikey = "QbGcoO0Qds9sQFDmY0MWg1Tq.xtuh1";
       const va = "1179000899";
@@ -18,7 +27,7 @@ class MakePayment {
       // const url = 'https://my.ipaymu.com/api/v2/payment'; // for production mode
 
       const body = {
-        product: ["Jacket"],
+        product: ["asd"],
         qty: ["1"],
         price: ["150000"],
         amount: "10000",

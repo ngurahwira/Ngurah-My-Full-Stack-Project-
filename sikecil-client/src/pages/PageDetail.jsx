@@ -20,7 +20,7 @@ const PageDetail = () => {
       try {
         setIsLoading(true);
         const response = await API.get(`/bid/${id}`);
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
       } catch (error) {
         setError(error);
@@ -40,9 +40,8 @@ const PageDetail = () => {
       const ipayMu = await API.put(`/bid/${id}`, updatedData);
 
       const { paymentUrl } = ipayMu.data;
-      // console.log("test", paymentUrl);
-      window.open(paymentUrl, "_blank");
-      navigate("/");
+      // window.open(paymentUrl, "_blank");
+      navigate(`/checkout/${id}`);
     } catch (error) {
       console.error("Error updating price:", error);
     }

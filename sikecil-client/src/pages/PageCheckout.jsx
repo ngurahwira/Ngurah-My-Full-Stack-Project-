@@ -1,4 +1,59 @@
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+const API = axios.create({
+  baseURL: "http://localhost:3000",
+});
+
 const Checkout = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState({});
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setIsLoading(true);
+        const response = await API.get(`/bid/${id}`);
+        console.log(response.data);
+        setData(response.data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    if (id) {
+      fetchData();
+    }
+  }, [id]);
+
+  const handleAddToPayment = async () => {
+    try {
+      //   const updatedData = { Price: newPrice };
+      const ipayMu = await API.get(`/checkout/${id}`);
+      console.log(ipayMu, 40);
+      const { paymentUrl } = ipayMu.data;
+      window.open(paymentUrl, "_blank");
+      navigate("/");
+    } catch (error) {
+      console.error("Error updating price:", error);
+    }
+  };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error fetching</p>;
+  }
+
   return (
     <>
       <div className="bg-gray-100 h-screen py-8">
@@ -22,25 +77,19 @@ const Checkout = () => {
                         <div className="flex items-center">
                           <img
                             className="h-16 w-16 mr-4"
-                            src="https://via.placeholder.com/150"
-                            alt="Product image"
+                            src={data.Img}
+                            alt={data.Item}
                           />
-                          <span className="font-semibold">Product name</span>
+                          <span className="font-semibold">{data.Item}</span>
                         </div>
                       </td>
-                      <td className="py-4">$19.99</td>
+                      <td className="py-4">Rp {data.Price}</td>
                       <td className="py-4">
                         <div className="flex items-center">
-                          <button className="border rounded-md py-2 px-4 mr-2">
-                            -
-                          </button>
                           <span className="text-center w-8">1</span>
-                          <button className="border rounded-md py-2 px-4 ml-2">
-                            +
-                          </button>
                         </div>
                       </td>
-                      <td className="py-4">$19.99</td>
+                      <td className="py-4">Rp {data.Price}</td>
                     </tr>
                     {/* <!-- More product rows --> */}
                   </tbody>
@@ -52,22 +101,25 @@ const Checkout = () => {
                 <h2 className="text-lg font-semibold mb-4">Summary</h2>
                 <div className="flex justify-between mb-2">
                   <span>Subtotal</span>
-                  <span>$19.99</span>
+                  <span>Rp {data.Price}</span>
                 </div>
                 <div className="flex justify-between mb-2">
                   <span>Taxes</span>
-                  <span>$1.99</span>
+                  <span>Rp 0</span>
                 </div>
                 <div className="flex justify-between mb-2">
                   <span>Shipping</span>
-                  <span>$0.00</span>
+                  <span>Rp 0</span>
                 </div>
                 <hr className="my-2" />
                 <div className="flex justify-between mb-2">
                   <span className="font-semibold">Total</span>
-                  <span className="font-semibold">$21.98</span>
+                  <span className="font-semibold">Rp {data.Price}</span>
                 </div>
-                <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">
+                <button
+                  className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full"
+                  onClick={handleAddToPayment}
+                >
                   Checkout
                 </button>
               </div>
