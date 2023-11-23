@@ -19,7 +19,7 @@ const Checkout = () => {
       try {
         setIsLoading(true);
         const response = await API.get(`/bid/${id}`);
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
       } catch (error) {
         setError(error);
@@ -35,9 +35,9 @@ const Checkout = () => {
 
   const handleAddToPayment = async () => {
     try {
-      //   const updatedData = { Price: newPrice };
       const ipayMu = await API.get(`/checkout/${id}`);
-      console.log(ipayMu, 40);
+
+      // console.log(ipayMu, 40);
       const { paymentUrl } = ipayMu.data;
       window.open(paymentUrl, "_blank");
       navigate("/");
