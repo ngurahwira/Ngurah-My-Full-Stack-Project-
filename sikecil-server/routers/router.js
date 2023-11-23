@@ -15,10 +15,11 @@ router.post("/register", UserLogin.register);
 router.post("/login", UserLogin.login);
 router.post("/auth/google", UserLogin.loginGoogle);
 router.get("/bid/:id", Controller.showDataDetail);
+router.get("/checkout/:id", Controller.showDataCheckOut);
 router.put("/bid/:id", Controller.updateData);
 
 //!Payment
-router.post("/payment", MakePayment.payment);
+router.post("/payment/:id", MakePayment.payment);
 
 router.use(authentication);
 //!CRUD
