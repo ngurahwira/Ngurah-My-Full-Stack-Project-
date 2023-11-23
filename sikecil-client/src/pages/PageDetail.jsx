@@ -35,17 +35,6 @@ const PageDetail = () => {
     }
   }, [id]);
 
-  const handleAddToCart = async () => {
-    try {
-      const updatedData = { Price: newPrice };
-      console.log(updatedData);
-      const ipayMu = await API.put(`/bid/${id}`, updatedData);
-      navigate(`/checkout/${id}`);
-    } catch (error) {
-      console.error("Error updating price:", error);
-    }
-  };
-
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -53,6 +42,17 @@ const PageDetail = () => {
   if (error) {
     return <p>Error fetching</p>;
   }
+
+  const handleAddToCart = async () => {
+    try {
+      const updatedData = { Price: newPrice };
+      // console.log(updatedData);
+      await API.put(`/bid/${id}`, updatedData);
+      navigate(`/checkout/${id}`);
+    } catch (error) {
+      console.error("Error updating price:", error);
+    }
+  };
 
   return (
     <>

@@ -1,7 +1,7 @@
 const errorHandler = (err, req, res, next) => {
   let status = 500;
   let message = "Internal Server Error";
-  console.log(err.name);
+  // console.log(err.name);
 
   switch (err.name) {
     case "SequelizeDatabaseError":
