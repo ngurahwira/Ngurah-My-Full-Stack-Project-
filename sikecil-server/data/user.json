@@ -1,0 +1,18 @@
+[
+  {
+    "fullname": "John Doe",
+    "address": "1234 Elm Street, Anytown, AN 12345",
+    "balance": 5000,
+    "email": "johndoe@example.com",
+    "password": "password123",
+    "role": "user"
+  },
+  {
+    "fullname": "Jane Smith",
+    "address": "4321 Maple Avenue, Othercity, OC 54321",
+    "balance": 7500,
+    "email": "janesmith@example.com",
+    "password": "securePass456",
+    "role": "admin"
+  }
+]

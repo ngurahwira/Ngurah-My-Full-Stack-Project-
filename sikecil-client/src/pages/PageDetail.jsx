@@ -2,9 +2,10 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../configs/config";
 
 const API = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: BASE_URL,
 });
 
 const PageDetail = () => {
@@ -20,7 +21,7 @@ const PageDetail = () => {
       try {
         setIsLoading(true);
         const response = await API.get(`/bid/${id}`);
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
       } catch (error) {
         setError(error);
@@ -34,20 +35,6 @@ const PageDetail = () => {
     }
   }, [id]);
 
-  const handleAddToCart = async () => {
-    try {
-      const updatedData = { Price: newPrice };
-      const ipayMu = await API.put(`/bid/${id}`, updatedData);
-
-      const { paymentUrl } = ipayMu.data;
-      // console.log("test", paymentUrl);
-      window.open(paymentUrl, "_blank");
-      navigate("/");
-    } catch (error) {
-      console.error("Error updating price:", error);
-    }
-  };
-
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -55,6 +42,17 @@ const PageDetail = () => {
   if (error) {
     return <p>Error fetching</p>;
   }
+
+  const handleAddToCart = async () => {
+    try {
+      const updatedData = { Price: newPrice };
+      // console.log(updatedData);
+      await API.put(`/bid/${id}`, updatedData);
+      navigate(`/checkout/${id}`);
+    } catch (error) {
+      console.error("Error updating price:", error);
+    }
+  };
 
   return (
     <>

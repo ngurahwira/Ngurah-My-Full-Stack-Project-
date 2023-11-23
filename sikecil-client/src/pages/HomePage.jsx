@@ -3,9 +3,10 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { BASE_URL } from "../configs/config";
 
 const API = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: BASE_URL,
 });
 
 const HomePage = () => {
