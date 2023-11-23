@@ -3,7 +3,7 @@ const Controller = require("../controllers/controllers");
 const UserLogin = require("../controllers/userController");
 const MakePayment = require("../helpers/ipaymuController");
 const authentication = require("../middlewares/authentication");
-const { authorization } = require("../middlewares/authorization");
+// const { authorization } = require("../middlewares/authorization"); //? saat ini belum di gunakan
 
 const router = express.Router();
 
@@ -21,7 +21,7 @@ router.put("/bid/:id", Controller.updateData);
 //!Payment
 router.post("/payment/:id", MakePayment.payment);
 
-router.use(authentication);
+// router.use(authentication); //? saat ini masih di handle di client
 //!CRUD
 
 module.exports = router;
