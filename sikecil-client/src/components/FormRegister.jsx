@@ -1,9 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../configs/config";
+BASE_URL;
 
 const API = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: BASE_URL,
 });
 
 const Register = () => {
