@@ -41,7 +41,7 @@ class Controller {
     try {
       const { id } = req.params;
       const data = await getDataById(id);
-      const paymentData = await MakePayment.payment();
+      const paymentData = await MakePayment.payment(data);
       console.log("tets12345", paymentData);
 
       res.status(200).json({

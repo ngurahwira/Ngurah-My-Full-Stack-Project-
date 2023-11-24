@@ -14,10 +14,15 @@ class MakePayment {
     });
   }
 
-  static async payment(req, res, next) {
+  static async payment(data) {
     try {
+      // console.log(data, ">>>>>>>>>>>>>>>>>>>>>>");
+      // console.log(data.get("amount").split(",").join(""), "<<<<<<<<<<<");
+      // const price = [`${data.get("amount").split(",").join("")}`];
+      // const format = ['"' + price + '"'];
       // const { id } = req.params;
-      // // console.log(req.params);
+      // console.log(format, "<<<<<<<<<");
+      // console.log(req.params);
       // const data = await getDataById(id);
       // console.log(data.get("item"));
       // adjust with your iPaymu api key & va
@@ -27,9 +32,9 @@ class MakePayment {
       // const url = 'https://my.ipaymu.com/api/v2/payment'; // for production mode
 
       const body = {
-        product: ["asd"],
+        product: [`${data.get("item")}`],
         qty: ["1"],
-        price: ["150000"],
+        price: ["10000"],
         amount: "10000",
         returnUrl: "https://your-website.com/thank-you-page", //your thank you page url
         cancelUrl: "https://your-website.com/cancel-page", // your cancel page url
