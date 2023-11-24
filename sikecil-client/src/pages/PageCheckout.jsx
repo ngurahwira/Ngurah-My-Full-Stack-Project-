@@ -20,6 +20,7 @@ const Checkout = () => {
       try {
         setIsLoading(true);
         const response = await API.get(`/bid/${id}`);
+
         // console.log(response.data);
         setData(response.data);
       } catch (error) {

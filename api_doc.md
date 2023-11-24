@@ -2,18 +2,6 @@
 
 &nbsp;
 
-# 3rd party
-
-- iPaymu (https://ipaymu.com/)
-- Google Sheets API (https://developers.google.com/sheets/api/reference/rest#service:-sheets.googleapis.com)
-
-# Link Deploy
-
-- FE : https://ngurah-my-full-stack-project.vercel.app/
-- BE :
-
-&nbsp;
-
 ## Models :
 
 _Profile_
